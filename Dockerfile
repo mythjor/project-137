@@ -7,7 +7,7 @@ RUN apk add --no-cache \
     ca-certificates \
     openssh
 
-ADD https://github.com/pocketbase/pocketbase/releases/download/v${PBVERSION}/pocketbase${PBVERSION}linuxamd64.zip /tmp/pb.zip
+ADD https://github.com/pocketbase/pocketbase/releases/download/v0.40.6/pocketbase_0.40.6_linux_amd64.zip
 RUN unzip /tmp/pb.zip -d /pb/
 
 EXPOSE 8080
