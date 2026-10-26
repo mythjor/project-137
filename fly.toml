@@ -1,1 +1,37 @@
+app = "project-137"
+primaryregion = "phx"
 
+[build.args]
+  PBVERSION = "0.40.6"
+
+[mounts]
+  source      = "pbdata"
+  destination = "/pb/pbdata"
+
+[httpservice]
+  internalport        = 8080
+  forcehttps          = true
+  autostopmachines   = "off"
+  autostartmachines  = true
+  minmachinesrunning = 1
+  processes            = ["app"]
+
+  [httpservice.concurrency]
+    type       = "requests"
+    softlimit = 200
+    hardlimit = 250
+
+  [[httpservice.checks]]
+    graceperiod = "15s"
+    interval     = "30s"
+    method       = "GET"
+    timeout      = "5s"
+    path         = "/api/health"
+
+[[restart]]
+  policy  = "always"
+  retries = 5
+
+[[vm]]
+  size   = "shared-cpu-1x"
+  memory = "256mb"
